@@ -5,12 +5,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/test")
 public class AuthenticationController {
     @GetMapping()
-    public String test() {
-        return "Test is success, congratulations!";
+    public List<String> test() {
+        return List.of("Test is success, congratulations!");
     }
 }
