@@ -1,0 +1,57 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-houses-table
+      author: dmarmul
+      changes:
+        - createTable:
+            tableName: houses
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: pk_houses
+                    nullable: false
+              - column:
+                  name: house_type_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: rooms
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: bedrooms
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: houseSquare
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: price
+                  type: java.math.BigDecimal
+                  constraints:
+                    nullable: false
+              - column:
+                  name: description
+                  type: varchar(255)
+              - column:
+                  name: is_deleted
+                  type: tinyint(1)
+                  defaultValue: 0
+                  constraints:
+                    nullable: false
+        - addForeignKeyConstraint:
+            baseTableName: houses
+            baseColumnNames: house_type_id
+            referencedTableName: house_types
+            referencedColumnNames: id
+            onDelete: CASCADE
+            constraintName: fk_shopping_carts_user_id

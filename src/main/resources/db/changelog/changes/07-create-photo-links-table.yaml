@@ -1,0 +1,33 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-photo-links-table
+      author: dmarmul
+      changes:
+        - createTable:
+            tableName: photo_links
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: pk_photo_links
+                    nullable: false
+              - column:
+                  name: house_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: photo_link
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+        - addForeignKeyConstraint:
+            baseTableName: photo_links
+            baseColumnNames: house_id
+            constraintName: fk_photo_links_house
+            referencedTableName: houses
+            referencedColumnNames: id
+            onDelete: CASCADE

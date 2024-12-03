@@ -14,19 +14,17 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 @Tag(name = "User management", description = "Endpoints for managing users")
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/auth")
 public class AuthenticationController {
     private final UserService userService;
     private final AuthenticationService authenticationService;
 
-    @PostMapping("/login")
+    @PostMapping("/log-in")
     @Operation(summary = "Login user",
             description = "Login user. Email must be already registered. "
                     + "Password must be valid. Return JWT token to client")
@@ -34,7 +32,7 @@ public class AuthenticationController {
         return authenticationService.authenticate(requestDto);
     }
 
-    @PostMapping("/registration")
+    @PostMapping("/sign-up")
     @ResponseStatus(HttpStatus.CREATED)
     @Operation(summary = "Add user",
             description = "Register a new user. Email must be unique. "

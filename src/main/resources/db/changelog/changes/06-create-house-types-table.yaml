@@ -1,10 +1,10 @@
 databaseChangeLog:
   - changeSet:
-      id: create-roles-table
+      id: create-house-types-table
       author: dmarmul
       changes:
         - createTable:
-            tableName: roles
+            tableName: house_types
             columns:
               - column:
                   name: id
@@ -12,10 +12,10 @@ databaseChangeLog:
                   autoIncrement: true
                   constraints:
                     primaryKey: true
-                    primaryKeyName: pk_roles
+                    primaryKeyName: pk_house_types
                     nullable: false
               - column:
-                  name: role
+                  name: house_type
                   type: varchar(255)
                   constraints:
                     nullable: false
