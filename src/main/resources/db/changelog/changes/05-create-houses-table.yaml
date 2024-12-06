@@ -15,8 +15,8 @@ databaseChangeLog:
                     primaryKeyName: pk_houses
                     nullable: false
               - column:
-                  name: house_type_id
-                  type: bigint
+                  name: house_type
+                  type: varchar(255)
                   constraints:
                     nullable: false
               - column:
@@ -30,7 +30,7 @@ databaseChangeLog:
                   constraints:
                     nullable: false
               - column:
-                  name: houseSquare
+                  name: house_square
                   type: bigint
                   constraints:
                     nullable: false
@@ -44,14 +44,7 @@ databaseChangeLog:
                   type: varchar(255)
               - column:
                   name: is_deleted
-                  type: tinyint(1)
-                  defaultValue: 0
+                  type: BOOLEAN
+                  defaultValueBoolean: false
                   constraints:
                     nullable: false
-        - addForeignKeyConstraint:
-            baseTableName: houses
-            baseColumnNames: house_type_id
-            referencedTableName: house_types
-            referencedColumnNames: id
-            onDelete: CASCADE
-            constraintName: fk_shopping_carts_user_id

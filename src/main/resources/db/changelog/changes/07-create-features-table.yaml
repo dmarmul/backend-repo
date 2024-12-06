@@ -1,10 +1,10 @@
 databaseChangeLog:
   - changeSet:
-      id: create-house-types-table
+      id: create-features-table
       author: dmarmul
       changes:
         - createTable:
-            tableName: house_types
+            tableName: features
             columns:
               - column:
                   name: id
@@ -12,10 +12,10 @@ databaseChangeLog:
                   autoIncrement: true
                   constraints:
                     primaryKey: true
-                    primaryKeyName: pk_house_types
+                    primaryKeyName: pk_features
                     nullable: false
               - column:
-                  name: house_type
+                  name: feature
                   type: varchar(255)
                   constraints:
                     nullable: false

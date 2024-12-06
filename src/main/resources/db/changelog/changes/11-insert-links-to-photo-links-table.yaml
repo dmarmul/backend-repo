@@ -1,0 +1,10 @@
+databaseChangeLog:
+  - changeSet:
+      id: insert-links-to-photo-links-table
+      author: dmarmul
+      changes:
+        - sqlFile:
+            path: db/changelog/changes/11-insert-links-to-photo-links-table.sql
+            endDelimiter: ";"
+            splitStatements: true
+            stripComments: true

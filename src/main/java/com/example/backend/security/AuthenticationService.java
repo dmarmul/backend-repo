@@ -1,7 +1,5 @@
 package com.example.backend.security;
 
-import com.example.backend.dto.UserLoginRequestDto;
-import com.example.backend.dto.UserLoginResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -14,11 +12,10 @@ public class AuthenticationService {
     private final JwtUtil jwtUtil;
     private final AuthenticationManager authenticationManager;
 
-    public UserLoginResponseDto authenticate(UserLoginRequestDto requestDto) {
+    public String authenticate(String email, String password) {
         final Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(requestDto.email(), requestDto.password())
+                new UsernamePasswordAuthenticationToken(email, password)
         );
-        String token = jwtUtil.generateToken(authentication.getName());
-        return new UserLoginResponseDto(token);
+        return jwtUtil.generateToken(authentication.getName());
     }
 }

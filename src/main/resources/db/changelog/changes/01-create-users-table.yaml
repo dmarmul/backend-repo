@@ -41,3 +41,6 @@ databaseChangeLog:
                   defaultValueBoolean: false
                   constraints:
                     nullable: false
+              - column:
+                  name: photo_url
+                  type: varchar(255)

@@ -1,0 +1,23 @@
+databaseChangeLog:
+  - changeSet:
+      id: insert-features-to-houses-features-table
+      author: dmarmul
+      changes:
+        - insert:
+            tableName: houses_features
+            columns:
+              - column:
+                  name: house_id
+                  value: 1
+              - column:
+                  name: feature_id
+                  value: 2
+        - insert:
+            tableName: houses_features
+            columns:
+              - column:
+                  name: house_id
+                  value: 1
+              - column:
+                  name: feature_id
+                  value: 3

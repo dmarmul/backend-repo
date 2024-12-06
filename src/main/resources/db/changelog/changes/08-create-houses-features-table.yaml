@@ -1,0 +1,35 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-houses-features-table
+      author: dmarmul
+      changes:
+        - createTable:
+            tableName: houses_features
+            columns:
+              - column:
+                  name: house_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: feature_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+        - addPrimaryKey:
+            tableName: houses_features
+            columnNames: house_id, feature_id
+        - addForeignKeyConstraint:
+            baseTableName: houses_features
+            baseColumnNames: house_id
+            constraintName: fk_houses_features_house
+            referencedTableName: houses
+            referencedColumnNames: id
+            onDelete: CASCADE
+        - addForeignKeyConstraint:
+            baseTableName: houses_features
+            baseColumnNames: feature_id
+            constraintName: fk_houses_features_feature
+            referencedTableName: features
+            referencedColumnNames: id
+            onDelete: CASCADE

@@ -1,0 +1,10 @@
+databaseChangeLog:
+  - changeSet:
+      id: insert-houses-to-houses-table
+      author: dmarmul
+      changes:
+        - sqlFile:
+            path: db/changelog/changes/10-insert-houses-to-houses-table.sql
+            endDelimiter: ";"
+            splitStatements: true
+            stripComments: true

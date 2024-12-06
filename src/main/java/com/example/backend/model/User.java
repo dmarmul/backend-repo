@@ -41,6 +41,9 @@ public class User implements UserDetails {
     private String lastName;
     @Column(nullable = false)
     private boolean isDeleted = false;
+    @Column
+    private String photoUrl;
+
     @ManyToMany
     @JoinTable(
             name = "users_roles",

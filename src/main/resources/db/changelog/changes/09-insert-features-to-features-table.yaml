@@ -1,0 +1,50 @@
+databaseChangeLog:
+  - changeSet:
+      id: insert-features-to-features-table
+      author: dmarmul
+      changes:
+        - insert:
+            tableName: features
+            columns:
+              - column:
+                  name: id
+                  value: 1
+              - column:
+                  name: feature
+                  value: ELEVATOR
+        - insert:
+            tableName: features
+            columns:
+              - column:
+                  name: id
+                  value: 2
+              - column:
+                  name: feature
+                  value: STORAGE_ROOM
+        - insert:
+            tableName: features
+            columns:
+              - column:
+                  name: id
+                  value: 3
+              - column:
+                  name: feature
+                  value: PASSIVE_VENTILATION_SYSTEM
+        - insert:
+            tableName: features
+            columns:
+              - column:
+                  name: id
+                  value: 4
+              - column:
+                  name: feature
+                  value: PARKING
+        - insert:
+            tableName: features
+            columns:
+              - column:
+                  name: id
+                  value: 5
+              - column:
+                  name: feature
+                  value: BALCONY

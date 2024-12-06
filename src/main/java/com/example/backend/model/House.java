@@ -1,7 +1,19 @@
 package com.example.backend.model;
 
 import com.fasterxml.jackson.annotation.JsonValue;
-import jakarta.persistence.*;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.Set;
@@ -44,41 +56,19 @@ public class House {
     private Set<PhotoLink> photoLinks = new HashSet<>();
     @ManyToMany
     @JoinTable(
-            name = "house_features",
+            name = "houses_features",
             joinColumns = @JoinColumn(name = "house_id"),
-            inverseJoinColumns = @JoinColumn(name = "features_id")
+            inverseJoinColumns = @JoinColumn(name = "feature_id")
     )
     private Set<Feature> features = new HashSet<>();
 
-    private enum HouseType {
-        ELEVATOR ("Elevator"),
-        STORAGE_ROOM("Storage room"),
-        PASSIVE_VENTILATION_SYSTEM("Passive ventilation system"),
-        PARKING("Parking"),
-        BALCONY("Balcony");
+    public enum HouseType {
+        APARTMENT("Apartment"),
+        HOUSE("House");
 
         private final String displayName;
 
         HouseType(String displayName) {
-            this.displayName = displayName;
-        }
-
-        @JsonValue
-        public String getDisplayName() {
-            return displayName;
-        }
-    }
-
-    public enum FeatureType {
-        ELEVATOR ("Elevator"),
-        STORAGE_ROOM("Storage room"),
-        PASSIVE_VENTILATION_SYSTEM("Passive ventilation system"),
-        PARKING("Parking"),
-        BALCONY("Balcony");
-
-        private final String displayName;
-
-        FeatureType(String displayName) {
             this.displayName = displayName;
         }
 

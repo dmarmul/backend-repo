@@ -1,7 +1,6 @@
 package com.example.backend.controller;
 
 import com.example.backend.dto.UserLoginRequestDto;
-import com.example.backend.dto.UserLoginResponseDto;
 import com.example.backend.dto.UserRegistrationRequestDto;
 import com.example.backend.dto.UserResponseDto;
 import com.example.backend.exception.RegistrationException;
@@ -28,8 +27,8 @@ public class AuthenticationController {
     @Operation(summary = "Login user",
             description = "Login user. Email must be already registered. "
                     + "Password must be valid. Return JWT token to client")
-    public UserLoginResponseDto login(@RequestBody @Valid UserLoginRequestDto requestDto) {
-        return authenticationService.authenticate(requestDto);
+    public UserResponseDto login(@RequestBody @Valid UserLoginRequestDto requestDto) {
+        return userService.authenticate(requestDto);
     }
 
     @PostMapping("/sign-up")
@@ -37,8 +36,11 @@ public class AuthenticationController {
     @Operation(summary = "Add user",
             description = "Register a new user. Email must be unique. "
                     + "Password size must be from 6 to 30 symbols. ShippingAddress can be null.")
-    public UserResponseDto register(@RequestBody @Valid UserRegistrationRequestDto request)
+    public UserResponseDto register(@RequestBody @Valid UserRegistrationRequestDto requestDto)
             throws RegistrationException {
-        return userService.register(request);
+        UserResponseDto userResponseDto = userService.register(requestDto);
+        userResponseDto.setToken(authenticationService.authenticate(
+                requestDto.getEmail(), requestDto.getPassword()));
+        return userResponseDto;
     }
 }
