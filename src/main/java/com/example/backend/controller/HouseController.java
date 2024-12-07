@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Tag(name = "House management", description = "Endpoints for managing houses")
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("residential/bye")
+@RequestMapping("residential/buy")
 public class HouseController {
     private final HouseService houseService;
 
