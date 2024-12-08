@@ -35,6 +35,8 @@ public class House {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(nullable = false)
+    private String street;
     @Enumerated(EnumType.STRING)
     private HouseType houseType;
     @Column(nullable = false)

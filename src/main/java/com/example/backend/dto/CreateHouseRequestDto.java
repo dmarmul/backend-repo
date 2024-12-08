@@ -16,6 +16,9 @@ import lombok.Setter;
 @Getter
 @Setter
 public class CreateHouseRequestDto {
+    @NotBlank
+    @Size(max = 100, message = "Max street length is 100 symbols")
+    private String street;
     @NotNull
     private House.HouseType houseType;
     @NotNull

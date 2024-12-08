@@ -15,6 +15,9 @@ databaseChangeLog:
                     primaryKeyName: pk_houses
                     nullable: false
               - column:
+                  name: street
+                  type: varchar(255)
+              - column:
                   name: house_type
                   type: varchar(255)
                   constraints:

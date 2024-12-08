@@ -11,6 +11,7 @@ import lombok.ToString;
 @ToString
 public class HouseCartDto {
     private Long id;
+    private String street;
     private House.HouseType houseType;
     private int rooms;
     private int bedrooms;
