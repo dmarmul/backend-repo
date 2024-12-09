@@ -1,0 +1,73 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-neighborhoods-table
+      author: dmarmul
+      changes:
+        - createTable:
+            tableName: neighborhoods
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: neighborhood_name
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: description
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: top_attractions
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: photo_link
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+        - addUniqueConstraint:
+            tableName: neighborhoods
+            columnNames: neighborhood_name
+
+  - changeSet:
+      id: create-key-details-table
+      author: dmarmul
+      changes:
+        - createTable:
+            tableName: key_details
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: neighborhood_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: description
+                  type: varchar(255)
+        - addForeignKeyConstraint:
+            baseTableName: key_details
+            baseColumnNames: neighborhood_id
+            constraintName: fk_key_details_neighborhood
+            referencedTableName: neighborhoods
+            referencedColumnNames: id
+            onDelete: CASCADE

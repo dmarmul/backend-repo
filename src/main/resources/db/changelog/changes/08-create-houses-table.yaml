@@ -23,6 +23,11 @@ databaseChangeLog:
                   constraints:
                     nullable: false
               - column:
+                  name: neighborhood_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
                   name: rooms
                   type: bigint
                   constraints:
@@ -51,3 +56,9 @@ databaseChangeLog:
                   defaultValueBoolean: false
                   constraints:
                     nullable: false
+        - addForeignKeyConstraint:
+            baseTableName: houses
+            baseColumnNames: neighborhood_id
+            referencedTableName: neighborhoods
+            referencedColumnNames: id
+            constraintName: fk_houses_neighborhood_id

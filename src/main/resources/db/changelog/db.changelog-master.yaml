@@ -8,18 +8,24 @@ databaseChangeLog:
   - include:
       file: db/changelog/changes/04-insert-roles-to-roles-table.yaml
   - include:
-      file: db/changelog/changes/05-create-houses-table.yaml
+      file: db/changelog/changes/05-create-neighborhoods-and-key-details-table.yaml
   - include:
-      file: db/changelog/changes/06-create-photo-links-table.yaml
+      file: db/changelog/changes/06-insert-neighborhoods-to-neighborhoods-table.yaml
   - include:
-      file: db/changelog/changes/07-create-features-table.yaml
+      file: db/changelog/changes/07-insert-details-to-key-details-table.yaml
   - include:
-      file: db/changelog/changes/08-create-houses-features-table.yaml
+      file: db/changelog/changes/08-create-houses-table.yaml
   - include:
-      file: db/changelog/changes/09-insert-features-to-features-table.yaml
+      file: db/changelog/changes/09-create-photo-links-table.yaml
   - include:
-      file: db/changelog/changes/10-insert-houses-to-houses-table.yaml
+      file: db/changelog/changes/10-create-features-table.yaml
   - include:
-      file: db/changelog/changes/11-insert-links-to-photo-links-table.yaml
+      file: db/changelog/changes/11-create-houses-features-table.yaml
   - include:
-      file: db/changelog/changes/12-insert-features-to-houses-features-table.yaml
+      file: db/changelog/changes/12-insert-features-to-features-table.yaml
+  - include:
+      file: db/changelog/changes/13-insert-houses-to-houses-table.yaml
+  - include:
+      file: db/changelog/changes/14-insert-links-to-photo-links-table.yaml
+  - include:
+      file: db/changelog/changes/15-insert-features-to-houses-features-table.yaml

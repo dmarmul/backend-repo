@@ -6,12 +6,14 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import java.math.BigDecimal;
@@ -39,6 +41,10 @@ public class House {
     private String street;
     @Enumerated(EnumType.STRING)
     private HouseType houseType;
+    @Enumerated(EnumType.STRING)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "neighborhood_id")
+    private Neighborhood neighborhood;
     @Column(nullable = false)
     private int rooms;
     @Column(nullable = false)
@@ -51,12 +57,12 @@ public class House {
     private String description;
     @Column(nullable = false)
     private boolean isDeleted = false;
-    @OneToMany(mappedBy = "house", cascade = CascadeType.ALL,
-            orphanRemoval = true)
+    @OneToMany(mappedBy = "house", fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL, orphanRemoval = true)
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     private Set<PhotoLink> photoLinks = new HashSet<>();
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "houses_features",
             joinColumns = @JoinColumn(name = "house_id"),

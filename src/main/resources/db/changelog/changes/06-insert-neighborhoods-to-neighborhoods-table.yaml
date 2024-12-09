@@ -1,0 +1,10 @@
+databaseChangeLog:
+  - changeSet:
+      id: insert-neighborhoods-to-neighborhoods-table
+      author: dmarmul
+      changes:
+        - sqlFile:
+            path: db/changelog/changes/06-insert-neighborhoods-to-neighborhoods-table.sql
+            endDelimiter: ";"
+            splitStatements: true
+            stripComments: true

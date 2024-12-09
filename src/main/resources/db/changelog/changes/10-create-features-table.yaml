@@ -20,3 +20,6 @@ databaseChangeLog:
                   constraints:
                     nullable: false
                     unique: true
+        - addUniqueConstraint:
+            tableName: features
+            columnNames: feature

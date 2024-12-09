@@ -1,10 +1,10 @@
 databaseChangeLog:
   - changeSet:
-      id: insert-links-to-photo-links-table
+      id: insert-features-to-features-table
       author: dmarmul
       changes:
         - sqlFile:
-            path: db/changelog/changes/11-insert-links-to-photo-links-table.sql
+            path: db/changelog/changes/15-insert-features-to-houses-features-table.sql
             endDelimiter: ";"
             splitStatements: true
             stripComments: true
