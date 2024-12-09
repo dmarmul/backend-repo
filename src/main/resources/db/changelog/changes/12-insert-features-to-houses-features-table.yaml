@@ -1,23 +1,10 @@
 databaseChangeLog:
   - changeSet:
-      id: insert-features-to-houses-features-table
+      id: insert-features-to-features-table
       author: dmarmul
       changes:
-        - insert:
-            tableName: houses_features
-            columns:
-              - column:
-                  name: house_id
-                  value: 1
-              - column:
-                  name: feature_id
-                  value: 2
-        - insert:
-            tableName: houses_features
-            columns:
-              - column:
-                  name: house_id
-                  value: 1
-              - column:
-                  name: feature_id
-                  value: 3
+        - sqlFile:
+            path: db/changelog/changes/12-insert-features-to-houses-features-table.sql
+            endDelimiter: ";"
+            splitStatements: true
+            stripComments: true

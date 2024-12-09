@@ -47,5 +47,14 @@ public class Feature implements GrantedAuthority {
         public String getDisplayName() {
             return displayName;
         }
+
+        public static Feature.FeatureType fromValue(String value) {
+            for (Feature.FeatureType type : values()) {
+                if (type.displayName.equalsIgnoreCase(value)) {
+                    return type;
+                }
+            }
+            throw new IllegalArgumentException("Unknown feature type: " + value);
+        }
     }
 }

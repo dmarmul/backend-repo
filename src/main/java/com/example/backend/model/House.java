@@ -78,5 +78,14 @@ public class House {
         public String getDisplayName() {
             return displayName;
         }
+
+        public static HouseType fromValue(String value) {
+            for (HouseType type : values()) {
+                if (type.displayName.equalsIgnoreCase(value)) {
+                    return type;
+                }
+            }
+            throw new IllegalArgumentException("Unknown house type: " + value);
+        }
     }
 }
