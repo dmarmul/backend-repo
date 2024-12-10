@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Tag(name = "Neighborhoods management", description = "Endpoints for managing neighborhoods")
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("residential/neighborhoods")
+@RequestMapping("neighborhoods")
 public class NeighborhoodController {
     private final NeighborhoodService neighborhoodService;
 

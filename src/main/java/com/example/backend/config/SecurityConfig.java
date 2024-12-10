@@ -41,7 +41,8 @@ public class SecurityConfig {
                 .authorizeHttpRequests(
                         auth -> auth
                                 .requestMatchers("/log-in", "/sign-up",
-                                        "/residential/**", "/swagger-ui/**")
+                                        "/residential/**", "/swagger-ui/**",
+                                        "/neighborhoods/**")
                                 .permitAll()
                                 .anyRequest()
                                 .authenticated()
