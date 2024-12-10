@@ -1,4 +1,4 @@
-package com.example.backend.dto;
+package com.example.backend.dto.neighborhood;
 
 import com.example.backend.model.Neighborhood;
 import lombok.Getter;

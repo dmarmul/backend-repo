@@ -4,7 +4,7 @@ databaseChangeLog:
       author: dmarmul
       changes:
         - sqlFile:
-            path: db/changelog/changes/15-insert-features-to-houses-features-table.sql
+            path: db/changelog/changes/18-insert-features-to-houses-features-table.sql
             endDelimiter: ";"
             splitStatements: true
             stripComments: true

@@ -4,7 +4,7 @@ databaseChangeLog:
       author: dmarmul
       changes:
         - sqlFile:
-            path: db/changelog/changes/14-insert-links-to-photo-links-table.sql
+            path: db/changelog/changes/17-insert-links-to-photo-links-table.sql
             endDelimiter: ";"
             splitStatements: true
             stripComments: true

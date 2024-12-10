@@ -38,6 +38,12 @@ public class Neighborhood implements GrantedAuthority {
     private String photoLink;
     @OneToMany(mappedBy = "neighborhood", fetch = FetchType.LAZY,
             cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<TransportDetails> transportDetails;
+    @OneToMany(mappedBy = "neighborhood", fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ParkingPlace> parkingPlace;
+    @OneToMany(mappedBy = "neighborhood", fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL, orphanRemoval = true)
     private List<KeyDetails> keyDetails;
 
     @Override
@@ -88,6 +94,60 @@ public class Neighborhood implements GrantedAuthority {
         private String name;
         @Column(nullable = false)
         private String description;
+        @ManyToOne(fetch = FetchType.LAZY, optional = false)
+        @JoinColumn(name = "neighborhood_id", nullable = false)
+        private Neighborhood neighborhood;
+    }
+
+    @Entity
+    @Getter
+    @Setter
+    @Table(name = "transport_details")
+    public static class TransportDetails implements GrantedAuthority {
+        @Id
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
+        private Long id;
+        @Enumerated(EnumType.STRING)
+        @Column(nullable = false)
+        private TransportType transportType;
+        @Column(nullable = false)
+        private String transportNumbers;
+        @ManyToOne(fetch = FetchType.LAZY, optional = false)
+        @JoinColumn(name = "neighborhood_id", nullable = false)
+        private Neighborhood neighborhood;
+
+        @Override
+        public String getAuthority() {
+            return transportType.getDisplayName();
+        }
+
+        public enum TransportType {
+            BUS("Bus"),
+            TRAM("Tram");
+
+            private final String displayName;
+
+            TransportType(String displayName) {
+                this.displayName = displayName;
+            }
+
+            @JsonValue
+            public String getDisplayName() {
+                return displayName;
+            }
+        }
+    }
+
+    @Entity
+    @Getter
+    @Setter
+    @Table(name = "parking_place")
+    public static class ParkingPlace {
+        @Id
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
+        private Long id;
+        @Column(nullable = false)
+        private String parkingPlace;
         @ManyToOne(fetch = FetchType.LAZY, optional = false)
         @JoinColumn(name = "neighborhood_id", nullable = false)
         private Neighborhood neighborhood;

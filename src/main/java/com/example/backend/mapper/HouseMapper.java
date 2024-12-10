@@ -1,8 +1,8 @@
 package com.example.backend.mapper;
 
 import com.example.backend.config.MapperConfig;
-import com.example.backend.dto.HouseCartDto;
-import com.example.backend.dto.HouseDto;
+import com.example.backend.dto.house.HouseCartDto;
+import com.example.backend.dto.house.HouseDto;
 import com.example.backend.model.Feature;
 import com.example.backend.model.House;
 import com.example.backend.model.PhotoLink;

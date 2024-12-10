@@ -1,8 +1,8 @@
 package com.example.backend.service;
 
-import com.example.backend.dto.UserLoginRequestDto;
-import com.example.backend.dto.UserRegistrationRequestDto;
-import com.example.backend.dto.UserResponseDto;
+import com.example.backend.dto.user.UserLoginRequestDto;
+import com.example.backend.dto.user.UserRegistrationRequestDto;
+import com.example.backend.dto.user.UserResponseDto;
 import jakarta.validation.Valid;
 
 public interface UserService {

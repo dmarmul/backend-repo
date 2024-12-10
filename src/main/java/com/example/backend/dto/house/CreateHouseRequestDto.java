@@ -1,4 +1,4 @@
-package com.example.backend.dto;
+package com.example.backend.dto.house;
 
 import com.example.backend.model.Feature;
 import com.example.backend.model.House;

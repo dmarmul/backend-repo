@@ -1,10 +1,10 @@
 databaseChangeLog:
   - changeSet:
-      id: insert-details-to-key-details-table
+      id: insert-parking-place-to-parking-place-table
       author: dmarmul
       changes:
         - sqlFile:
-            path: db/changelog/changes/07-insert-details-to-key-details-table.sql
+            path: db/changelog/changes/08-insert-parking-place-to-parking-place-table.sql
             endDelimiter: ";"
             splitStatements: true
             stripComments: true

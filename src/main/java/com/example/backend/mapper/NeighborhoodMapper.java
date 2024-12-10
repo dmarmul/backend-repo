@@ -1,8 +1,8 @@
 package com.example.backend.mapper;
 
 import com.example.backend.config.MapperConfig;
-import com.example.backend.dto.NeighborhoodCartDto;
-import com.example.backend.dto.NeighborhoodDto;
+import com.example.backend.dto.neighborhood.NeighborhoodCartDto;
+import com.example.backend.dto.neighborhood.NeighborhoodDto;
 import com.example.backend.model.Neighborhood;
 import org.mapstruct.Mapper;
 

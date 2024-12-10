@@ -1,7 +1,7 @@
 package com.example.backend.service.impl;
 
-import com.example.backend.dto.NeighborhoodCartDto;
-import com.example.backend.dto.NeighborhoodDto;
+import com.example.backend.dto.neighborhood.NeighborhoodCartDto;
+import com.example.backend.dto.neighborhood.NeighborhoodDto;
 import com.example.backend.exception.EntityNotFoundException;
 import com.example.backend.mapper.NeighborhoodMapper;
 import com.example.backend.repository.NeighborhoodRepository;

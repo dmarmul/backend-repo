@@ -1,7 +1,7 @@
 package com.example.backend.controller;
 
-import com.example.backend.dto.NeighborhoodCartDto;
-import com.example.backend.dto.NeighborhoodDto;
+import com.example.backend.dto.neighborhood.NeighborhoodCartDto;
+import com.example.backend.dto.neighborhood.NeighborhoodDto;
 import com.example.backend.service.NeighborhoodService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;

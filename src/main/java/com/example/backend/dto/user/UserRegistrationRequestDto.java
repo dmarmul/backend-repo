@@ -1,4 +1,4 @@
-package com.example.backend.dto;
+package com.example.backend.dto.user;
 
 import com.example.backend.validation.FieldMatch;
 import jakarta.validation.constraints.Email;

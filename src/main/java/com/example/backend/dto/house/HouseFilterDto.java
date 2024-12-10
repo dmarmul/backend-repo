@@ -1,4 +1,4 @@
-package com.example.backend.dto;
+package com.example.backend.dto.house;
 
 import java.math.BigDecimal;
 import java.util.Set;

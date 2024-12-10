@@ -1,4 +1,4 @@
-package com.example.backend.dto;
+package com.example.backend.dto.neighborhood;
 
 import com.example.backend.model.Neighborhood;
 import java.util.List;
@@ -15,5 +15,7 @@ public class NeighborhoodDto {
     private String description;
     private String topAttractions;
     private String photoLink;
+    private List<TransportDetailsDto> transportDetails;
+    private List<ParkingPlaceDto> parkingPlace;
     private List<KeyDetailsDto> keyDetails;
 }

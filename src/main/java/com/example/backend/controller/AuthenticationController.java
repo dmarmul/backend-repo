@@ -1,8 +1,8 @@
 package com.example.backend.controller;
 
-import com.example.backend.dto.UserLoginRequestDto;
-import com.example.backend.dto.UserRegistrationRequestDto;
-import com.example.backend.dto.UserResponseDto;
+import com.example.backend.dto.user.UserLoginRequestDto;
+import com.example.backend.dto.user.UserRegistrationRequestDto;
+import com.example.backend.dto.user.UserResponseDto;
 import com.example.backend.exception.RegistrationException;
 import com.example.backend.security.AuthenticationService;
 import com.example.backend.service.UserService;

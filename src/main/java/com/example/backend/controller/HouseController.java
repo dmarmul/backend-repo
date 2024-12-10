@@ -1,8 +1,8 @@
 package com.example.backend.controller;
 
-import com.example.backend.dto.HouseCartDto;
-import com.example.backend.dto.HouseDto;
-import com.example.backend.dto.HouseFilterDto;
+import com.example.backend.dto.house.HouseCartDto;
+import com.example.backend.dto.house.HouseDto;
+import com.example.backend.dto.house.HouseFilterDto;
 import com.example.backend.service.HouseService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;

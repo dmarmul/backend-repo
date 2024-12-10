@@ -1,0 +1,69 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-transport-details-table
+      author: dmarmul
+      changes:
+        - createTable:
+            tableName: transport_details
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: transport_type
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: transport_numbers
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: neighborhood_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+        - addForeignKeyConstraint:
+            baseTableName: transport_details
+            baseColumnNames: neighborhood_id
+            constraintName: fk_transport_details_neighborhood
+            referencedTableName: neighborhoods
+            referencedColumnNames: id
+            onDelete: CASCADE
+
+  - changeSet:
+      id: create-parking-place-table
+      author: dmarmul
+      changes:
+        - createTable:
+            tableName: parking_place
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: neighborhood_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: parking_place
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+        - addForeignKeyConstraint:
+            baseTableName: parking_place
+            baseColumnNames: neighborhood_id
+            constraintName: fk_parking_place_neighborhood
+            referencedTableName: neighborhoods
+            referencedColumnNames: id
+            onDelete: CASCADE
