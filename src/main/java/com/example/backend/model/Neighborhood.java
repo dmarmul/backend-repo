@@ -80,6 +80,15 @@ public class Neighborhood implements GrantedAuthority {
         public String getDisplayName() {
             return displayName;
         }
+
+        public static NeighborhoodName fromValue(String value) {
+            for (NeighborhoodName name : values()) {
+                if (name.displayName.equalsIgnoreCase(value)) {
+                    return name;
+                }
+            }
+            throw new IllegalArgumentException("Unknown neighborhood name: " + value);
+        }
     }
 
     @Entity

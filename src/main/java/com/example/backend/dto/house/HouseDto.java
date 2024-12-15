@@ -21,4 +21,5 @@ public class HouseDto {
     private String description;
     private Set<String> photoLinks;
     private Set<String> features;
+    private Boolean isLiked;
 }

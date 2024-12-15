@@ -14,4 +14,5 @@ public class HouseFilterDto {
     private BigDecimal minPrice;
     private BigDecimal maxPrice;
     private Set<String> features;
+    private String neighborhood;
 }

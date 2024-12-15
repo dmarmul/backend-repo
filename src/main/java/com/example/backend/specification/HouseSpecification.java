@@ -2,6 +2,7 @@ package com.example.backend.specification;
 
 import com.example.backend.model.Feature;
 import com.example.backend.model.House;
+import com.example.backend.model.Neighborhood;
 import jakarta.persistence.criteria.Join;
 import java.math.BigDecimal;
 import java.util.Set;
@@ -39,6 +40,16 @@ public class HouseSpecification {
         return (root, query, criteriaBuilder) -> {
             Join<Object, Feature> featureJoin = root.join("features");
             return featureJoin.get("feature").in(featureTypesEnum);
+        };
+    }
+
+    public static Specification<House> neighborhoodEquals(String neighborhood) {
+        Neighborhood.NeighborhoodName neighborhoodNameEnum =
+                Neighborhood.NeighborhoodName.fromValue(neighborhood);
+        return (root, query, criteriaBuilder) -> {
+            Join<House, Neighborhood> neighborhoodJoin = root.join("neighborhood");
+            return criteriaBuilder.equal(neighborhoodJoin.get(
+                    "neighborhoodName"), neighborhoodNameEnum);
         };
     }
 }

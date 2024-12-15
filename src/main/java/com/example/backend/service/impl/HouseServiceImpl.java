@@ -6,11 +6,17 @@ import com.example.backend.dto.house.HouseFilterDto;
 import com.example.backend.exception.EntityNotFoundException;
 import com.example.backend.mapper.HouseMapper;
 import com.example.backend.model.House;
+import com.example.backend.model.User;
 import com.example.backend.repository.HouseRepository;
+import com.example.backend.repository.UserRepository;
 import com.example.backend.service.HouseService;
 import com.example.backend.specification.HouseSpecification;
+import jakarta.transaction.Transactional;
 import java.net.URL;
 import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.Set;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -28,19 +34,27 @@ public class HouseServiceImpl implements HouseService {
     private static final String REGION = "us-east-1";
     private final HouseRepository houseRepository;
     private final HouseMapper houseMapper;
+    private final UserRepository userRepository;
 
     @Override
-    public HouseDto findById(Long id) {
-        House house = houseRepository.findById(id).orElseThrow(
-                () -> new EntityNotFoundException("Can't find house by id: " + id));
+    public HouseDto findById(User user, Long id) {
+        House house = checkHouse(id);
         house.getPhotoLinks()
                 .forEach(photoLink ->
                         photoLink.setPhotoLink(setUrl(photoLink.getPhotoLink())));
-        return houseMapper.toDto(house);
+        HouseDto houseDto = houseMapper.toDto(house);
+        if (user != null) {
+            Optional<Long> optionalId = checkUser(user).getLikedHouses().stream()
+                    .map(House::getId)
+                    .filter(houseId -> Objects.equals(houseId, id))
+                    .findFirst();
+            houseDto.setIsLiked(optionalId.isPresent());
+        }
+        return houseDto;
     }
 
     @Override
-    public List<HouseCartDto> findAll(HouseFilterDto filterDto,
+    public List<HouseCartDto> findAll(User user, HouseFilterDto filterDto,
                                       Sort sort, Pageable pageable) {
         Specification<House> spec = Specification.where(null);
 
@@ -62,8 +76,11 @@ public class HouseServiceImpl implements HouseService {
         if (filterDto.getFeatures() != null && !filterDto.getFeatures().isEmpty()) {
             spec = spec.and(HouseSpecification.featuresIn(filterDto.getFeatures()));
         }
+        if (filterDto.getNeighborhood() != null) {
+            spec = spec.and(HouseSpecification.neighborhoodEquals(filterDto.getNeighborhood()));
+        }
 
-        return houseRepository.findAll(spec, pageable).stream()
+        List<HouseCartDto> houseCarts = houseRepository.findAll(spec, pageable).stream()
                 .peek(house ->
                         house.getPhotoLinks()
                                 .forEach(photoLink ->
@@ -71,6 +88,27 @@ public class HouseServiceImpl implements HouseService {
                                 )
                 ).map(houseMapper::toHouseCartDto)
                 .toList();
+        if (user != null) {
+            List<Long> longList = checkUser(user).getLikedHouses().stream()
+                    .map(House::getId)
+                    .toList();
+            houseCarts.forEach(dto -> dto.setIsLiked(longList.contains(dto.getId())));
+        }
+        return houseCarts;
+    }
+
+    @Override
+    @Transactional
+    public void likeHouseById(User user, Long id) {
+        User savedUser = checkUser(user);
+        House house = checkHouse(id);
+
+        Set<House> likedHouses = savedUser.getLikedHouses();
+        if (!likedHouses.contains(house)) {
+            likedHouses.add(house);
+        } else {
+            likedHouses.remove(house);
+        }
     }
 
     private String setUrl(String photoName) {
@@ -85,5 +123,17 @@ public class HouseServiceImpl implements HouseService {
                 .build());
 
         return url.toString();
+    }
+
+    private House checkHouse(Long id) {
+        return houseRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException(
+                        "Can't find house by id: " + id));
+    }
+
+    private User checkUser(User user) {
+        return userRepository.findByEmail(user.getEmail())
+                .orElseThrow(() -> new EntityNotFoundException(
+                        "Can't find user by email: " + user.getEmail()));
     }
 }

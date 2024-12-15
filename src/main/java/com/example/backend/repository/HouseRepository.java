@@ -15,7 +15,7 @@ public interface HouseRepository extends JpaRepository<House, Long> {
     @Override
     Optional<House> findById(@NonNull Long id);
 
-    @EntityGraph(attributePaths = "photoLinks")
+    @EntityGraph(attributePaths = {"photoLinks", "neighborhood"})
     @NonNull
     Page<House> findAll(Specification<House> spec, @NonNull Pageable pageable);
 }

@@ -18,4 +18,5 @@ public class HouseCartDto {
     private int houseSquare;
     private BigDecimal price;
     private String photoUrl;
+    private Boolean isLiked = false;
 }

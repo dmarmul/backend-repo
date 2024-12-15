@@ -1,0 +1,35 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-users-houses-table
+      author: dmarmul
+      changes:
+        - createTable:
+            tableName: users_houses
+            columns:
+              - column:
+                  name: user_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: house_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+        - addPrimaryKey:
+            tableName: users_houses
+            columnNames: user_id, house_id
+        - addForeignKeyConstraint:
+            baseTableName: users_houses
+            baseColumnNames: user_id
+            constraintName: fk_users_houses_user
+            referencedTableName: users
+            referencedColumnNames: id
+            onDelete: CASCADE
+        - addForeignKeyConstraint:
+            baseTableName: users_houses
+            baseColumnNames: house_id
+            constraintName: fk_users_houses_house
+            referencedTableName: houses
+            referencedColumnNames: id
+            onDelete: CASCADE
