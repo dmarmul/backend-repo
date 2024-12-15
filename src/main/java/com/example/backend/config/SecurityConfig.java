@@ -42,7 +42,7 @@ public class SecurityConfig {
                         auth -> auth
                                 .requestMatchers("/log-in", "/sign-up",
                                         "/residential/**", "/swagger-ui/**",
-                                        "/neighborhoods/**")
+                                        "/neighborhoods/**", "/sendmail/**")
                                 .permitAll()
                                 .anyRequest()
                                 .authenticated()

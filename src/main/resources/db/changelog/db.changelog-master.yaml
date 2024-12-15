@@ -35,3 +35,5 @@ databaseChangeLog:
       file: db/changelog/changes/17-insert-links-to-photo-links-table.yaml
   - include:
       file: db/changelog/changes/18-insert-features-to-houses-features-table.yaml
+  - include:
+      file: db/changelog/changes/19-create-mail-users-table.yaml
