@@ -8,6 +8,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface UserRepository extends JpaRepository<User, Long> {
     boolean existsByEmail(String email);
 
-    @EntityGraph(attributePaths = {"roles", "likedHouses"})
+    @EntityGraph(attributePaths = {"roles", "likedHouses", "likedHouses.photoLinks"})
     Optional<User> findByEmail(String email);
 }

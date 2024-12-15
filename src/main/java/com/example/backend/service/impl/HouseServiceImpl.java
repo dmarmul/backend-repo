@@ -111,7 +111,7 @@ public class HouseServiceImpl implements HouseService {
         }
     }
 
-    private String setUrl(String photoName) {
+    String setUrl(String photoName) {
         S3Client s3 = S3Client.builder()
                 .region(software.amazon.awssdk.regions.Region.of(REGION))
                 .credentialsProvider(ProfileCredentialsProvider.create())
