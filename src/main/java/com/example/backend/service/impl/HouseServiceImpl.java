@@ -18,6 +18,7 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
@@ -29,6 +30,8 @@ import software.amazon.awssdk.services.s3.model.GetUrlRequest;
 @RequiredArgsConstructor
 @Service
 public class HouseServiceImpl implements HouseService {
+    private static final int DEFAULT_SEARCH_PAGE = 0;
+    private static final int HOUSE_CARTS_LIMIT = 3;
     private static final String BUCKET_NAME = "smart-estate-backend";
     private static final String KEY_NAME = "bye/";
     private static final String REGION = "us-east-1";
@@ -50,6 +53,16 @@ public class HouseServiceImpl implements HouseService {
                     .findFirst();
             houseDto.setIsLiked(optionalId.isPresent());
         }
+        houseDto.setHouseCarts(houseRepository
+                .findAll(PageRequest.of(DEFAULT_SEARCH_PAGE, HOUSE_CARTS_LIMIT))
+                .stream()
+                .peek(findedHouse ->
+                        findedHouse.getPhotoLinks()
+                                .forEach(photoLink ->
+                                        photoLink.setPhotoLink(setUrl(photoLink.getPhotoLink()))
+                                )
+                ).map(houseMapper::toHouseCartDto)
+                .toList());
         return houseDto;
     }
 

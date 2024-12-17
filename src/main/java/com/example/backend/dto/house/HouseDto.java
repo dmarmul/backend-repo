@@ -2,6 +2,7 @@ package com.example.backend.dto.house;
 
 import com.example.backend.model.House;
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.Set;
 import lombok.Getter;
 import lombok.Setter;
@@ -21,5 +22,6 @@ public class HouseDto {
     private String description;
     private Set<String> photoLinks;
     private Set<String> features;
-    private Boolean isLiked;
+    private Boolean isLiked = false;
+    private List<HouseCartDto> houseCarts;
 }
