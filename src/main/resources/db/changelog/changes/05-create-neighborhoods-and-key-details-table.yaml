@@ -20,7 +20,7 @@ databaseChangeLog:
                     nullable: false
               - column:
                   name: description
-                  type: varchar(255)
+                  type: varchar(500)
                   constraints:
                     nullable: false
               - column:
@@ -63,7 +63,7 @@ databaseChangeLog:
                     nullable: false
               - column:
                   name: description
-                  type: varchar(255)
+                  type: varchar(500)
         - addForeignKeyConstraint:
             baseTableName: key_details
             baseColumnNames: neighborhood_id
