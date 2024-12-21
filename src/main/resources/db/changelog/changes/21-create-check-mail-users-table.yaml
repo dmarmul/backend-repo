@@ -1,0 +1,26 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-check-mail-users-table
+      author: dmarmul
+      changes:
+        - createTable:
+            tableName: check_mail_users
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: email
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+                    unique: true
+              - column:
+                  name: checked_number
+                  type: bigint
+                  constraints:
+                    nullable: false

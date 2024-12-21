@@ -11,6 +11,7 @@ import com.example.backend.mapper.UserMapper;
 import com.example.backend.model.House;
 import com.example.backend.model.Role;
 import com.example.backend.model.User;
+import com.example.backend.repository.CheckUserRepository;
 import com.example.backend.repository.RoleRepository;
 import com.example.backend.repository.UserRepository;
 import com.example.backend.security.AuthenticationService;
@@ -29,6 +30,7 @@ public class UserServiceImpl implements UserService {
     private final AuthenticationService authenticationService;
     private final HouseMapper houseMapper;
     private final HouseServiceImpl houseService;
+    private final CheckUserRepository checkUserRepository;
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
     private final UserMapper userMapper;
@@ -40,6 +42,11 @@ public class UserServiceImpl implements UserService {
         if (userRepository.existsByEmail(requestDto.getEmail())) {
             throw new RegistrationException(
                     "User " + requestDto.getEmail() + " already exist");
+        }
+        if (!checkUserRepository.existsByEmailAndCheckedNumber(requestDto.getEmail(),
+                requestDto.getVerificationCode())) {
+            throw new RegistrationException(
+                    "Code " + requestDto.getVerificationCode() + " is not match");
         }
         User user = userMapper.toModel(requestDto);
         user.setPassword(passwordEncoder.encode(user.getPassword()));

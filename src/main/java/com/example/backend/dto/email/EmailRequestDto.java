@@ -6,5 +6,5 @@ import lombok.Getter;
 @Getter
 public class EmailRequestDto {
     @Email(message = "Invalid email address")
-    private String emailTo;
+    private String email;
 }

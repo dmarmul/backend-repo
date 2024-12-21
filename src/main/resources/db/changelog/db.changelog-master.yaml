@@ -39,3 +39,5 @@ databaseChangeLog:
       file: db/changelog/changes/19-create-mail-users-table.yaml
   - include:
       file: db/changelog/changes/20-create-users-houses-table.yaml
+  - include:
+      file: db/changelog/changes/21-create-check-mail-users-table.yaml

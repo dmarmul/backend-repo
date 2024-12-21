@@ -7,4 +7,6 @@ public interface MailService {
     void sendWelcomeMessage(EmailRequestDto emailRequest);
 
     void sendMessageToAll(MessageRequestDto requestDto);
+
+    void sendCheckedCode(EmailRequestDto emailRequest);
 }

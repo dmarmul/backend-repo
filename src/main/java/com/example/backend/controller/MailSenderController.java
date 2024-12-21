@@ -27,4 +27,9 @@ public class MailSenderController {
     public void sendMessageToAll(@Valid @RequestBody MessageRequestDto requestDto) {
         mailService.sendMessageToAll(requestDto);
     }
+
+    @PostMapping("/sign-up")
+    public void sendVerificationCode(@Valid @RequestBody EmailRequestDto requestDto) {
+        mailService.sendCheckedCode(requestDto);
+    }
 }
