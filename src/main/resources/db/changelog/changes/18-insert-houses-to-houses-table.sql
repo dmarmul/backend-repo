@@ -1,0 +1,20 @@
+INSERT INTO houses (id, street, house_type, neighborhood_id, realtor_id, rooms, bedrooms, house_square, price, description)
+VALUES
+    (1,'Kattenburgerhof', 'APARTMENT', 1, 1, 4, 3, 103, 750000,
+     'Looking for a well-laid-out maisonette apartment with 3 bedrooms, a sunny southeast-facing balcony, and an elevator?This modern 4-room apartment offers the perfect combination of comfort, space, and an ideal location—it has everything you''re looking for!'
+     'The maisonette boasts a living area of approximately 103 sqm (NEN-2580) and is situated on the third and fourth floors of a well-maintained complex. With a spacious balcony offering delightful views, it’s the perfect spot to relax. Additionally, there’s a private storage space on the ground floor.'
+     'Located in a car-free, quiet, and open area, but just minutes away from the vibrant city center with its lovely shops, boutiques, restaurants, and cafés, this property provides the best of both worlds: tranquility and lively surroundings.'),
+    (2,'Kantershof', 'APARTMENT', 1, 2, 4, 3, 92, 475000, 'Located in the lively Amsterdam-Zuidoost in the popular Kantershof neighborhood, this recently completely renovated family home awaits you. Kantershof was created in the 1970s as part of the renewal of Amsterdam-Zuidoost. The neighborhood is known for its characteristic courtyard structure and green, child-friendly living environment. What once started as a progressive concept for quiet living in the middle of the city, has grown into a warm neighborhood with a strong sense of community.'
+     'This home is immediately habitable and offers comfortable living with plenty of opportunities for expansion. You can enjoy the deep backyard, a quiet living environment and the convenience of perpetual leasehold in a neighborhood that exudes both history and coziness.'
+     'With a generous living area of approximately 92 m², this house offers an oasis of peace and style. Upon entering, you are welcomed in a bright living room with a view of the backyard of no less than 46 m², situated on the northeast. The living room connects seamlessly to the kitchen, which is equipped with all basic appliances. The ground floor also has a separate toilet and handy storage cupboards.'
+     'On the first floor there are three cosy bedrooms and a modern bathroom that is fully equipped for your comfort. The spacious layout and practical landing make this an ideal living space for families or couples. The house also offers possibilities for expansion so that you can increase the living space as desired.'),
+    (3,'Leusdenhof', 'APARTMENT', 1, 3, 2, 1, 96, 270000,
+     'Unique opportunity! Affordable living in a green and peaceful area of Amsterdam. This conveniently located 2-room apartment on the first floor is wonderfully spacious and features a large balcony with a view of a lush, green environment.'
+     'There''s plenty of potential to style and arrange the home according to your own ideas. Feeling inspired yet? Then this apartment is perfect for you. Around the property, there is ample parking, and you’ll always have your own designated parking spot! We take you through: •    Living pleasure: 61.8 m2 •    Available right away! •    Furniture is negotiable •    Quiet location in green surroundings •    Bright living room with open kitchen (1980) •    Sanitary facilities including a bath (1980) •    Opportunity for own layout and styling •    Spacious bedroom •    Large, partly covered balcony with open views •    Ample parking space •    Let''s show you around!'),
+    (4,'Banneplein', 'APARTMENT', 1, 4, 4, 3, 40, 400, 'fourth description'),
+    (5,'Botterstraat', 'APARTMENT', 1, 5, 1, 2, 20, 200, 'fifth description'),
+    (6,'Willem de Zwijgerlaan', 'APARTMENT', 1, 6, 2, 1, 30, 400, 'sixth description'),
+    (7,'Edmond Halleylaan', 'APARTMENT', 1, 7, 3, 3, 50, 500, 'seventh description'),
+    (8,'Banneplein', 'APARTMENT', 1, 8, 4, 2, 80, 600, 'eighth description'),
+    (9,'Willem de Zwijgerlaan', 'APARTMENT', 1, 9, 1, 1, 90, 600, 'ninth description'),
+    (10,'IJburglaan', 'APARTMENT', 1, 10, 2, 3, 100, 800, 'tenth description');

@@ -1,0 +1,35 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-users-realtors-table
+      author: dmarmul
+      changes:
+        - createTable:
+            tableName: users_realtors
+            columns:
+              - column:
+                  name: user_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: realtor_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+        - addPrimaryKey:
+            tableName: users_realtors
+            columnNames: user_id, realtor_id
+        - addForeignKeyConstraint:
+            baseTableName: users_realtors
+            baseColumnNames: user_id
+            constraintName: fk_users_realtors_user
+            referencedTableName: users
+            referencedColumnNames: id
+            onDelete: CASCADE
+        - addForeignKeyConstraint:
+            baseTableName: users_realtors
+            baseColumnNames: realtor_id
+            constraintName: fk_users_realtors_realtor
+            referencedTableName: realtors
+            referencedColumnNames: id
+            onDelete: CASCADE

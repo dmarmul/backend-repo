@@ -1,7 +1,10 @@
 INSERT INTO houses_features (house_id, feature_id)
 VALUES
+    (1,1),
     (1,2),
     (1,3),
+    (1,4),
+    (1,5),
     (2,1),
     (2,4),
     (3,5),

@@ -20,24 +20,30 @@ databaseChangeLog:
   - include:
       file: db/changelog/changes/10-insert-details-to-key-details-table.yaml
   - include:
-      file: db/changelog/changes/11-create-houses-table.yaml
+      file: db/changelog/changes/11-create-realtors-table.yaml
   - include:
-      file: db/changelog/changes/12-create-photo-links-table.yaml
+      file: db/changelog/changes/12-insert-realtors-to-realtors-table.yaml
   - include:
-      file: db/changelog/changes/13-create-features-table.yaml
+      file: db/changelog/changes/13-create-houses-table.yaml
   - include:
-      file: db/changelog/changes/14-create-houses-features-table.yaml
+      file: db/changelog/changes/14-create-photo-links-table.yaml
   - include:
-      file: db/changelog/changes/15-insert-features-to-features-table.yaml
+      file: db/changelog/changes/15-create-features-table.yaml
   - include:
-      file: db/changelog/changes/16-insert-houses-to-houses-table.yaml
+      file: db/changelog/changes/16-create-houses-features-table.yaml
   - include:
-      file: db/changelog/changes/17-insert-links-to-photo-links-table.yaml
+      file: db/changelog/changes/17-insert-features-to-features-table.yaml
   - include:
-      file: db/changelog/changes/18-insert-features-to-houses-features-table.yaml
+      file: db/changelog/changes/18-insert-houses-to-houses-table.yaml
   - include:
-      file: db/changelog/changes/19-create-mail-users-table.yaml
+      file: db/changelog/changes/19-insert-links-to-photo-links-table.yaml
   - include:
-      file: db/changelog/changes/20-create-users-houses-table.yaml
+      file: db/changelog/changes/20-insert-features-to-houses-features-table.yaml
   - include:
-      file: db/changelog/changes/21-create-check-mail-users-table.yaml
+      file: db/changelog/changes/21-create-mail-users-table.yaml
+  - include:
+      file: db/changelog/changes/22-create-users-houses-table.yaml
+  - include:
+      file: db/changelog/changes/23-create-users-realtors-table.yaml
+  - include:
+      file: db/changelog/changes/24-create-check-mail-users-table.yaml

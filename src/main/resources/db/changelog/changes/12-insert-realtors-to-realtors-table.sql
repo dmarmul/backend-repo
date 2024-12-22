@@ -1,0 +1,22 @@
+INSERT INTO realtors (id, email, name, agency_name, phone_number, photo_url)
+VALUES
+    (1,'realtor1mail@gmail.com', 'Janine de Vries', 'Vos & Kleian Makelaardij B.V.', '+380661111111',
+     'https://smart-estate-backend.s3.eu-north-1.amazonaws.com/realtors/realtor1.jpeg'),
+    (2,'realtor2mail@gmail.com', 'Luca Janssen', 'Canal View Realty', '+380662222222',
+         'https://smart-estate-backend.s3.eu-north-1.amazonaws.com/realtors/realtor2.jpeg'),
+    (3,'realtor3mail@gmail.com', 'Sophie de Vries', 'Amsterdam City Living', '+380663333333',
+         'https://smart-estate-backend.s3.eu-north-1.amazonaws.com/realtors/realtor3.jpeg'),
+    (4,'realtor4mail@gmail.com', 'Milan Brouwer', 'Urban Dream Estates', '+380664444444',
+         'https://smart-estate-backend.s3.eu-north-1.amazonaws.com/realtors/realtor4.jpeg'),
+    (5,'realtor5mail@gmail.com', 'Nina de Haan', 'Urban Dream Estates', '+380665555555',
+         'https://smart-estate-backend.s3.eu-north-1.amazonaws.com/realtors/realtor5.jpeg'),
+    (6,'realtor6mail@gmail.com', 'Joris Bakker', 'Netherlands Real Estate Network', '+380666666666',
+         'https://smart-estate-backend.s3.eu-north-1.amazonaws.com/realtors/realtor6.jpeg'),
+    (7,'realtor7mail@gmail.com', 'Emma van der Laan', 'Netherlands Real Estate Network', '+380667777777',
+         'https://smart-estate-backend.s3.eu-north-1.amazonaws.com/realtors/realtor7.jpeg'),
+    (8,'realtor8mail@gmail.com', 'Maxime Koster', 'Amsterdam Lifestyle Properties', '+380668888888',
+         'https://smart-estate-backend.s3.eu-north-1.amazonaws.com/realtors/realtor8.jpeg'),
+    (9,'realtor9mail@gmail.com', 'Jasper Vermeer', 'Canal Side Realty', '+380669999999',
+         'https://smart-estate-backend.s3.eu-north-1.amazonaws.com/realtors/realtor9.jpeg'),
+    (10,'realtor10mail@gmail.com', 'Iris de Boer', 'CityScape Real Estate', '+380661010101',
+         'https://smart-estate-backend.s3.eu-north-1.amazonaws.com/realtors/realtor10.jpeg');

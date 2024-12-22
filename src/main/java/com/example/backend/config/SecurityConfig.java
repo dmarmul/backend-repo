@@ -43,7 +43,7 @@ public class SecurityConfig {
                                 .requestMatchers("/log-in", "/sign-up",
                                         "/residential/**", "/swagger-ui/**",
                                         "/neighborhoods/**", "/sendmail/**",
-                                        "/profile/**")
+                                        "/profile/**", "/realtor/**")
                                 .permitAll()
                                 .anyRequest()
                                 .authenticated()

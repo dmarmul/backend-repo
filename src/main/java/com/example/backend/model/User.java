@@ -61,6 +61,14 @@ public class User implements UserDetails {
     )
     private Set<House> likedHouses = new HashSet<>();
 
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "users_realtors",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "realtor_id")
+    )
+    private Set<Realtor> realtors = new HashSet<>();
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return roles;

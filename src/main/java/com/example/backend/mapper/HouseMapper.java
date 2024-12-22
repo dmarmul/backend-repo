@@ -16,6 +16,7 @@ import org.mapstruct.MappingTarget;
 public interface HouseMapper {
     @Mapping(target = "photoLinks", ignore = true)
     @Mapping(target = "features", ignore = true)
+    @Mapping(target = "realtorDto", ignore = true)
     HouseDto toDto(House house);
 
     @Mapping(target = "photoUrl", ignore = true)

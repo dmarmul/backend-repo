@@ -1,5 +1,6 @@
 package com.example.backend.dto.house;
 
+import com.example.backend.dto.user.RealtorDto;
 import com.example.backend.model.House;
 import java.math.BigDecimal;
 import java.util.List;
@@ -24,4 +25,5 @@ public class HouseDto {
     private Set<String> features;
     private Boolean isLiked = false;
     private List<HouseCartDto> houseCarts;
+    private RealtorDto realtorDto;
 }

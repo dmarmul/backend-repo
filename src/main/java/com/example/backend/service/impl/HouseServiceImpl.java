@@ -5,6 +5,7 @@ import com.example.backend.dto.house.HouseDto;
 import com.example.backend.dto.house.HouseFilterDto;
 import com.example.backend.exception.EntityNotFoundException;
 import com.example.backend.mapper.HouseMapper;
+import com.example.backend.mapper.RealtorMapper;
 import com.example.backend.model.House;
 import com.example.backend.model.User;
 import com.example.backend.repository.HouseRepository;
@@ -38,6 +39,7 @@ public class HouseServiceImpl implements HouseService {
     private final HouseRepository houseRepository;
     private final HouseMapper houseMapper;
     private final UserRepository userRepository;
+    private final RealtorMapper realtorMapper;
 
     @Override
     public HouseDto findById(User user, Long id) {
@@ -52,6 +54,7 @@ public class HouseServiceImpl implements HouseService {
                     .filter(houseId -> Objects.equals(houseId, id))
                     .findFirst();
             houseDto.setIsLiked(optionalId.isPresent());
+            houseDto.setRealtorDto(realtorMapper.toDto(house.getRealtor()));
         }
         houseDto.setHouseCarts(houseRepository
                 .findAll(PageRequest.of(DEFAULT_SEARCH_PAGE, HOUSE_CARTS_LIMIT))

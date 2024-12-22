@@ -1,12 +1,14 @@
 package com.example.backend.service.impl;
 
 import com.example.backend.dto.house.HouseCartDto;
+import com.example.backend.dto.user.RealtorDto;
 import com.example.backend.dto.user.UserLoginRequestDto;
 import com.example.backend.dto.user.UserRegistrationRequestDto;
 import com.example.backend.dto.user.UserResponseDto;
 import com.example.backend.exception.EntityNotFoundException;
 import com.example.backend.exception.RegistrationException;
 import com.example.backend.mapper.HouseMapper;
+import com.example.backend.mapper.RealtorMapper;
 import com.example.backend.mapper.UserMapper;
 import com.example.backend.model.House;
 import com.example.backend.model.Role;
@@ -29,6 +31,7 @@ import org.springframework.stereotype.Service;
 public class UserServiceImpl implements UserService {
     private final AuthenticationService authenticationService;
     private final HouseMapper houseMapper;
+    private final RealtorMapper realtorMapper;
     private final HouseServiceImpl houseService;
     private final CheckUserRepository checkUserRepository;
     private final UserRepository userRepository;
@@ -85,6 +88,17 @@ public class UserServiceImpl implements UserService {
                 .peek(houseCartDto -> houseCartDto.setIsLiked(true))
                 .skip((long) pageable.getPageNumber() * pageable.getPageSize())
                 .limit(pageable.getPageSize())
+                .toList();
+    }
+
+    @Override
+    public List<RealtorDto> findAllContactedRealtors(User user, Pageable fixedPageable) {
+        return userRepository.findByEmail(user.getEmail())
+                .orElseThrow(() -> new EntityNotFoundException(
+                        "Can't find user by email: " + user.getEmail()))
+                .getRealtors()
+                .stream()
+                .map(realtorMapper::toDto)
                 .toList();
     }
 }

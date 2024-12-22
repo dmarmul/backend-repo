@@ -11,7 +11,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.lang.NonNull;
 
 public interface HouseRepository extends JpaRepository<House, Long> {
-    @EntityGraph(attributePaths = {"photoLinks", "features"})
+    @EntityGraph(attributePaths = {"photoLinks", "features", "realtor"})
     @NonNull
     @Override
     Optional<House> findById(@NonNull Long id);

@@ -45,6 +45,9 @@ public class House {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "neighborhood_id")
     private Neighborhood neighborhood;
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "realtor_id", nullable = false)
+    private Realtor realtor;
     @Column(nullable = false)
     private int rooms;
     @Column(nullable = false)

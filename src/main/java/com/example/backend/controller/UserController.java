@@ -1,6 +1,7 @@
 package com.example.backend.controller;
 
 import com.example.backend.dto.house.HouseCartDto;
+import com.example.backend.dto.user.RealtorDto;
 import com.example.backend.model.User;
 import com.example.backend.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -33,5 +34,16 @@ public class UserController {
         Pageable fixedPageable = PageRequest.of(pageable.getPageNumber(), DEFAULT_PAGE_SIZE);
 
         return userService.findAllLikedHouses(user, fixedPageable);
+    }
+
+    @GetMapping("/contacted-props")
+    @PreAuthorize("hasRole('USER')")
+    @Operation(summary = "Get all contacted realtors",
+            description = "Get a list of all contacted realtors")
+    public List<RealtorDto> getAllContactedRealtors(@AuthenticationPrincipal User user,
+                                              Pageable pageable) {
+        Pageable fixedPageable = PageRequest.of(pageable.getPageNumber(), DEFAULT_PAGE_SIZE);
+
+        return userService.findAllContactedRealtors(user, fixedPageable);
     }
 }
