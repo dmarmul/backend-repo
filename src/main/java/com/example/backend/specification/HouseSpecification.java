@@ -4,6 +4,8 @@ import com.example.backend.model.Feature;
 import com.example.backend.model.House;
 import com.example.backend.model.Neighborhood;
 import jakarta.persistence.criteria.Join;
+import jakarta.persistence.criteria.Root;
+import jakarta.persistence.criteria.Subquery;
 import java.math.BigDecimal;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -38,18 +40,29 @@ public class HouseSpecification {
                 .collect(Collectors.toSet());
 
         return (root, query, criteriaBuilder) -> {
-            Join<Object, Feature> featureJoin = root.join("features");
-            return featureJoin.get("feature").in(featureTypesEnum);
+            Subquery<Long> subquery = query.subquery(Long.class);
+            Root<House> subRoot = subquery.from(House.class);
+
+            Join<House, Feature> subFeatureJoin = subRoot.join("features");
+            subquery.select(subRoot.get("id"))
+                    .where(subFeatureJoin.get("feature").in(featureTypesEnum))
+                    .groupBy(subRoot.get("id"))
+                    .having(criteriaBuilder.equal(
+                            criteriaBuilder.countDistinct(subFeatureJoin.get("feature")),
+                            featureTypesEnum.size()
+                    ));
+            return criteriaBuilder.in(root.get("id")).value(subquery);
         };
     }
 
-    public static Specification<House> neighborhoodEquals(String neighborhood) {
-        Neighborhood.NeighborhoodName neighborhoodNameEnum =
-                Neighborhood.NeighborhoodName.fromValue(neighborhood);
+    public static Specification<House> neighborhoodsIn(Set<String> neighborhoods) {
+        Set<Neighborhood.NeighborhoodName> neighborhoodNameEnums = neighborhoods.stream()
+                .map(Neighborhood.NeighborhoodName::fromValue)
+                .collect(Collectors.toSet());
+
         return (root, query, criteriaBuilder) -> {
             Join<House, Neighborhood> neighborhoodJoin = root.join("neighborhood");
-            return criteriaBuilder.equal(neighborhoodJoin.get(
-                    "neighborhoodName"), neighborhoodNameEnum);
+            return neighborhoodJoin.get("neighborhoodName").in(neighborhoodNameEnums);
         };
     }
 }

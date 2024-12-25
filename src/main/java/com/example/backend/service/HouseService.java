@@ -14,4 +14,6 @@ public interface HouseService {
     List<HouseCartDto> findAll(User user, HouseFilterDto filterDto, Sort sort, Pageable pageable);
 
     void likeHouseById(User user, Long id);
+
+    void addContact(User user, Long id);
 }

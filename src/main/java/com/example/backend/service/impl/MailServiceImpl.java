@@ -56,11 +56,11 @@ public class MailServiceImpl implements MailService {
     public void sendCheckedCode(EmailRequestDto emailRequest) {
         if (userRepository.existsByEmail(emailRequest.getEmail())) {
             throw new RegistrationException(
-                    "User " + emailRequest.getEmail() + " already exist");
+                    "User " + emailRequest.getEmail() + " already exist in userRepository");
         }
         if (checkUserRepository.existsByEmail(emailRequest.getEmail())) {
             throw new RegistrationException(
-                    "User " + emailRequest.getEmail() + " already exist");
+                    "User " + emailRequest.getEmail() + " already exist in checkUserRepository");
         }
         CheckMailUser user = new CheckMailUser();
         user.setEmail(emailRequest.getEmail());

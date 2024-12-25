@@ -48,7 +48,13 @@ public class HouseController {
 
     @PostMapping("/saved/{id}")
     @Operation(summary = "Add liked house", description = "Add liked house by id")
-    public void likedHouseById(@AuthenticationPrincipal User user, @PathVariable Long id) {
+    public void likeHouseById(@AuthenticationPrincipal User user, @PathVariable Long id) {
         houseService.likeHouseById(user, id);
+    }
+
+    @PostMapping("/contact/{id}")
+    @Operation(summary = "Add contacted house", description = "Add contacted house by id")
+    public void contactHouseById(@AuthenticationPrincipal User user, @PathVariable Long id) {
+        houseService.addContact(user, id);
     }
 }

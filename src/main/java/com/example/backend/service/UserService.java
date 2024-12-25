@@ -1,7 +1,7 @@
 package com.example.backend.service;
 
+import com.example.backend.dto.house.ContactedHouseCartDto;
 import com.example.backend.dto.house.HouseCartDto;
-import com.example.backend.dto.user.RealtorDto;
 import com.example.backend.dto.user.UserLoginRequestDto;
 import com.example.backend.dto.user.UserRegistrationRequestDto;
 import com.example.backend.dto.user.UserResponseDto;
@@ -17,5 +17,5 @@ public interface UserService {
 
     List<HouseCartDto> findAllLikedHouses(User user, Pageable pageable);
 
-    List<RealtorDto> findAllContactedRealtors(User user, Pageable fixedPageable);
+    List<ContactedHouseCartDto> findAllUserContacts(User user, Pageable pageable);
 }

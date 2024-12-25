@@ -1,7 +1,7 @@
 package com.example.backend.controller;
 
+import com.example.backend.dto.house.ContactedHouseCartDto;
 import com.example.backend.dto.house.HouseCartDto;
-import com.example.backend.dto.user.RealtorDto;
 import com.example.backend.model.User;
 import com.example.backend.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -21,7 +21,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("profile")
 public class UserController {
-    private static final int DEFAULT_PAGE_SIZE = 4;
+    private static final int LIKED_PAGE_SIZE = 4;
+    private static final int CONTACTED_PAGE_SIZE = 2;
 
     private final UserService userService;
 
@@ -31,19 +32,19 @@ public class UserController {
             description = "Get a list of all available houses with filter params if specified")
     public List<HouseCartDto> getAllLikedHouses(@AuthenticationPrincipal User user,
                                                 Pageable pageable) {
-        Pageable fixedPageable = PageRequest.of(pageable.getPageNumber(), DEFAULT_PAGE_SIZE);
+        Pageable fixedPageable = PageRequest.of(pageable.getPageNumber(), LIKED_PAGE_SIZE);
 
         return userService.findAllLikedHouses(user, fixedPageable);
     }
 
     @GetMapping("/contacted-props")
     @PreAuthorize("hasRole('USER')")
-    @Operation(summary = "Get all contacted realtors",
-            description = "Get a list of all contacted realtors")
-    public List<RealtorDto> getAllContactedRealtors(@AuthenticationPrincipal User user,
-                                              Pageable pageable) {
-        Pageable fixedPageable = PageRequest.of(pageable.getPageNumber(), DEFAULT_PAGE_SIZE);
+    @Operation(summary = "Get all contacted houses",
+            description = "Get a list of all contacted houses")
+    public List<ContactedHouseCartDto> getAllContactedHouses(@AuthenticationPrincipal User user,
+                                                             Pageable pageable) {
+        Pageable fixedPageable = PageRequest.of(pageable.getPageNumber(), CONTACTED_PAGE_SIZE);
 
-        return userService.findAllContactedRealtors(user, fixedPageable);
+        return userService.findAllUserContacts(user, fixedPageable);
     }
 }

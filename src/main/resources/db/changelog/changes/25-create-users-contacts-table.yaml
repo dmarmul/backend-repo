@@ -1,0 +1,48 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-users-contacts-table
+      author: dmarmul
+      changes:
+        - createTable:
+            tableName: users_contacts
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: user_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: house_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: contact_date
+                  type: TIMESTAMP
+                  constraints:
+                    nullable: false
+        - addUniqueConstraint:
+            tableName: users_contacts
+            columnNames: user_id, house_id
+            constraintName: uq_users_contacts_user_house
+        - addForeignKeyConstraint:
+            baseTableName: users_contacts
+            baseColumnNames: user_id
+            constraintName: fk_users_contacts_user
+            referencedTableName: users
+            referencedColumnNames: id
+            onDelete: CASCADE
+        - addForeignKeyConstraint:
+            baseTableName: users_contacts
+            baseColumnNames: house_id
+            constraintName: fk_users_contacts_house
+            referencedTableName: houses
+            referencedColumnNames: id
+            onDelete: CASCADE

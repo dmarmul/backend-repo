@@ -54,7 +54,7 @@ databaseChangeLog:
                     nullable: false
               - column:
                   name: description
-                  type: varchar(1500)
+                  type: varchar(2500)
               - column:
                   name: is_deleted
                   type: BOOLEAN

@@ -8,12 +8,15 @@ import com.example.backend.mapper.HouseMapper;
 import com.example.backend.mapper.RealtorMapper;
 import com.example.backend.model.House;
 import com.example.backend.model.User;
+import com.example.backend.model.UserContact;
 import com.example.backend.repository.HouseRepository;
+import com.example.backend.repository.UserContactRepository;
 import com.example.backend.repository.UserRepository;
 import com.example.backend.service.HouseService;
 import com.example.backend.specification.HouseSpecification;
 import jakarta.transaction.Transactional;
 import java.net.URL;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -36,6 +39,7 @@ public class HouseServiceImpl implements HouseService {
     private static final String BUCKET_NAME = "smart-estate-backend";
     private static final String KEY_NAME = "bye/";
     private static final String REGION = "us-east-1";
+    private final UserContactRepository contactRepository;
     private final HouseRepository houseRepository;
     private final HouseMapper houseMapper;
     private final UserRepository userRepository;
@@ -92,8 +96,8 @@ public class HouseServiceImpl implements HouseService {
         if (filterDto.getFeatures() != null && !filterDto.getFeatures().isEmpty()) {
             spec = spec.and(HouseSpecification.featuresIn(filterDto.getFeatures()));
         }
-        if (filterDto.getNeighborhood() != null) {
-            spec = spec.and(HouseSpecification.neighborhoodEquals(filterDto.getNeighborhood()));
+        if (filterDto.getNeighborhoods() != null && !filterDto.getNeighborhoods().isEmpty()) {
+            spec = spec.and(HouseSpecification.neighborhoodsIn(filterDto.getNeighborhoods()));
         }
 
         List<HouseCartDto> houseCarts = houseRepository.findAll(spec, pageable).stream()
@@ -125,6 +129,23 @@ public class HouseServiceImpl implements HouseService {
         } else {
             likedHouses.remove(house);
         }
+    }
+
+    public void addContact(User user, Long houseId) {
+        checkUser(user);
+        House house = houseRepository.findById(houseId)
+                .orElseThrow(() -> new EntityNotFoundException(
+                        "Can't find house by id: " + houseId));
+        if (contactRepository.existsByUserAndHouse(user, house)) {
+            return;
+        }
+
+        UserContact contact = new UserContact();
+        contact.setUser(user);
+        contact.setHouse(house);
+        contact.setContactDate(LocalDateTime.now());
+
+        contactRepository.save(contact);
     }
 
     String setUrl(String photoName) {

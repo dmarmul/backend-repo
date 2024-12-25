@@ -47,3 +47,5 @@ databaseChangeLog:
       file: db/changelog/changes/23-create-users-realtors-table.yaml
   - include:
       file: db/changelog/changes/24-create-check-mail-users-table.yaml
+  - include:
+      file: db/changelog/changes/25-create-users-contacts-table.yaml

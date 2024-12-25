@@ -52,7 +52,7 @@ public class Neighborhood implements GrantedAuthority {
     }
 
     public enum NeighborhoodName {
-        NIEUWMARKET("Niewmarket"),
+        NIEUWMARKET("Nieuwmarket"),
         MUSEUMPLEIN("Museumplein"),
         DE_WALLEN("De Wallen"),
         JORDAAN("Jordaan"),

@@ -1,4 +1,4 @@
-package com.example.backend.dto.user;
+package com.example.backend.dto.realtor;
 
 import lombok.Getter;
 import lombok.Setter;

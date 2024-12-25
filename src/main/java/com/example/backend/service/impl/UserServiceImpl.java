@@ -1,14 +1,14 @@
 package com.example.backend.service.impl;
 
+import com.example.backend.dto.house.ContactedHouseCartDto;
 import com.example.backend.dto.house.HouseCartDto;
-import com.example.backend.dto.user.RealtorDto;
 import com.example.backend.dto.user.UserLoginRequestDto;
 import com.example.backend.dto.user.UserRegistrationRequestDto;
 import com.example.backend.dto.user.UserResponseDto;
 import com.example.backend.exception.EntityNotFoundException;
 import com.example.backend.exception.RegistrationException;
 import com.example.backend.mapper.HouseMapper;
-import com.example.backend.mapper.RealtorMapper;
+import com.example.backend.mapper.UserContactMapper;
 import com.example.backend.mapper.UserMapper;
 import com.example.backend.model.House;
 import com.example.backend.model.Role;
@@ -30,8 +30,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserServiceImpl implements UserService {
     private final AuthenticationService authenticationService;
+    private final UserContactMapper contactMapper;
     private final HouseMapper houseMapper;
-    private final RealtorMapper realtorMapper;
     private final HouseServiceImpl houseService;
     private final CheckUserRepository checkUserRepository;
     private final UserRepository userRepository;
@@ -78,6 +78,8 @@ public class UserServiceImpl implements UserService {
                 .getLikedHouses();
 
         return likedHouses.stream()
+                .skip((long) pageable.getPageNumber() * pageable.getPageSize())
+                .limit(pageable.getPageSize())
                 .peek(house ->
                         house.getPhotoLinks()
                                 .forEach(photoLink -> photoLink.setPhotoLink(
@@ -86,19 +88,25 @@ public class UserServiceImpl implements UserService {
                 )
                 .map(houseMapper::toHouseCartDto)
                 .peek(houseCartDto -> houseCartDto.setIsLiked(true))
-                .skip((long) pageable.getPageNumber() * pageable.getPageSize())
-                .limit(pageable.getPageSize())
                 .toList();
     }
 
+    @Transactional
     @Override
-    public List<RealtorDto> findAllContactedRealtors(User user, Pageable fixedPageable) {
-        return userRepository.findByEmail(user.getEmail())
+    public List<ContactedHouseCartDto> findAllUserContacts(User user, Pageable pageable) {
+        User savedUser = userRepository.findByEmail(user.getEmail())
                 .orElseThrow(() -> new EntityNotFoundException(
-                        "Can't find user by email: " + user.getEmail()))
-                .getRealtors()
-                .stream()
-                .map(realtorMapper::toDto)
+                        "Can't find user by email: " + user.getEmail()));
+
+        return savedUser.getContacts().stream()
+                .skip((long) pageable.getPageNumber() * pageable.getPageSize())
+                .limit(pageable.getPageSize())
+                .peek(userContact -> userContact.getHouse().getPhotoLinks()
+                        .forEach(photoLink ->
+                                photoLink.setPhotoLink(
+                                        houseService.setUrl(photoLink.getPhotoLink())))
+                )
+                .map(contactMapper::toContactedHouseCardDto)
                 .toList();
     }
 }
