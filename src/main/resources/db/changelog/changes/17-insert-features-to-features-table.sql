@@ -24,7 +24,7 @@ VALUES
     (22, 'PUBLIC_PARKING'),
     (23, 'HIP_ROOF'),
     (24, 'ATTACHED_BRICK_STORAGE'),
-    (25, 'CABLE_ROOF'),
+    (25, 'GABLE_ROOF'),
     (26, 'OPTICAL_FIBRE'),
     (27, 'DISTRICT_HEATING'),
     (28, 'ROOF_TERRACE'),
