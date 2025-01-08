@@ -1,13 +1,12 @@
 package com.example.backend.controller;
 
-import com.example.backend.dto.house.HouseCartDto;
 import com.example.backend.dto.house.HouseDto;
 import com.example.backend.dto.house.HouseFilterDto;
+import com.example.backend.dto.house.HousePageDto;
 import com.example.backend.model.User;
 import com.example.backend.service.HouseService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -32,10 +31,10 @@ public class HouseController {
     @GetMapping
     @Operation(summary = "Get all houses",
             description = "Get a list of all available houses with filter params if specified")
-    public List<HouseCartDto> getAll(@AuthenticationPrincipal User user,
-                                     @ModelAttribute HouseFilterDto filterDto,
-                                     Sort sort, Pageable pageable) {
-        Pageable fixedPageable = PageRequest.of(pageable.getPageNumber(), DEFAULT_PAGE_SIZE);
+    public HousePageDto getAll(@AuthenticationPrincipal User user,
+                               @ModelAttribute HouseFilterDto filterDto,
+                               Sort sort, Pageable pageable) {
+        Pageable fixedPageable = PageRequest.of(pageable.getPageNumber() - 1, DEFAULT_PAGE_SIZE);
 
         return houseService.findAll(user, filterDto, sort, fixedPageable);
     }

@@ -3,6 +3,7 @@ package com.example.backend.service.impl;
 import com.example.backend.dto.house.HouseCartDto;
 import com.example.backend.dto.house.HouseDto;
 import com.example.backend.dto.house.HouseFilterDto;
+import com.example.backend.dto.house.HousePageDto;
 import com.example.backend.exception.EntityNotFoundException;
 import com.example.backend.mapper.HouseMapper;
 import com.example.backend.mapper.RealtorMapper;
@@ -35,6 +36,7 @@ import software.amazon.awssdk.services.s3.model.GetUrlRequest;
 @Service
 public class HouseServiceImpl implements HouseService {
     private static final int DEFAULT_SEARCH_PAGE = 0;
+    private static final int HOUSE_CARTS_PAGE_SIZE = 15;
     private static final int HOUSE_CARTS_LIMIT = 3;
     private static final String BUCKET_NAME = "smart-estate-backend";
     private static final String KEY_NAME = "bye/";
@@ -74,8 +76,8 @@ public class HouseServiceImpl implements HouseService {
     }
 
     @Override
-    public List<HouseCartDto> findAll(User user, HouseFilterDto filterDto,
-                                      Sort sort, Pageable pageable) {
+    public HousePageDto findAll(User user, HouseFilterDto filterDto,
+                                Sort sort, Pageable pageable) {
         Specification<House> spec = Specification.where(null);
 
         if (filterDto.getHouseType() != null) {
@@ -114,7 +116,12 @@ public class HouseServiceImpl implements HouseService {
                     .toList();
             houseCarts.forEach(dto -> dto.setIsLiked(longList.contains(dto.getId())));
         }
-        return houseCarts;
+
+        HousePageDto housePageDto = new HousePageDto();
+        housePageDto.setHouseCartDtoList(houseCarts);
+        housePageDto.setMaxPageNumber(
+                (int) Math.ceil((double) houseRepository.count() / HOUSE_CARTS_PAGE_SIZE));
+        return housePageDto;
     }
 
     @Override
