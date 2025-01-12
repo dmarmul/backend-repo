@@ -60,8 +60,8 @@ public class HouseServiceImpl implements HouseService {
                     .filter(houseId -> Objects.equals(houseId, id))
                     .findFirst();
             houseDto.setIsLiked(optionalId.isPresent());
-            houseDto.setRealtorDto(realtorMapper.toDto(house.getRealtor()));
         }
+        houseDto.setRealtorDto(realtorMapper.toDto(house.getRealtor()));
         houseDto.setHouseCarts(houseRepository
                 .findAll(PageRequest.of(DEFAULT_SEARCH_PAGE, HOUSE_CARTS_LIMIT))
                 .stream()
