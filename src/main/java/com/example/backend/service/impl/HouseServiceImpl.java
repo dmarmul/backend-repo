@@ -119,8 +119,9 @@ public class HouseServiceImpl implements HouseService {
 
         HousePageDto housePageDto = new HousePageDto();
         housePageDto.setHouseCartDtoList(houseCarts);
-        housePageDto.setMaxPageNumber(
-                (int) Math.ceil((double) houseRepository.count() / HOUSE_CARTS_PAGE_SIZE));
+        int maxHouseNumber = (int) Math.ceil((double) houseRepository.count());
+        housePageDto.setMaxHouseNumber(maxHouseNumber);
+        housePageDto.setMaxPageNumber(maxHouseNumber / HOUSE_CARTS_PAGE_SIZE);
         return housePageDto;
     }
 

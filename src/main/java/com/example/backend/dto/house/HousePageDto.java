@@ -11,4 +11,5 @@ import lombok.ToString;
 public class HousePageDto {
     private List<HouseCartDto> houseCartDtoList;
     private int maxPageNumber;
+    private int maxHouseNumber;
 }
