@@ -34,7 +34,7 @@ public class HouseController {
     public HousePageDto getAll(@AuthenticationPrincipal User user,
                                @ModelAttribute HouseFilterDto filterDto,
                                Sort sort, Pageable pageable) {
-        if (pageable.getPageNumber() < 0) {
+        if (pageable.getPageNumber() > 0) {
             pageable = PageRequest.of(pageable.getPageNumber() - 1, DEFAULT_PAGE_SIZE);
         }
         return houseService.findAll(user, filterDto, sort, pageable);
