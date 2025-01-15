@@ -128,9 +128,9 @@ public class HouseServiceImpl implements HouseService {
 
     @Override
     @Transactional
-    public void likeHouseById(User user, Long id) {
+    public void likeHouseById(User user, Long houseId) {
         User savedUser = checkUser(user);
-        House house = checkHouse(id);
+        House house = checkHouse(houseId);
 
         Set<House> likedHouses = savedUser.getLikedHouses();
         if (!likedHouses.contains(house)) {
@@ -142,9 +142,7 @@ public class HouseServiceImpl implements HouseService {
 
     public void addContact(User user, Long houseId) {
         checkUser(user);
-        House house = houseRepository.findById(houseId)
-                .orElseThrow(() -> new EntityNotFoundException(
-                        "Can't find house by id: " + houseId));
+        House house = checkHouse(houseId);
         if (contactRepository.existsByUserAndHouse(user, house)) {
             return;
         }

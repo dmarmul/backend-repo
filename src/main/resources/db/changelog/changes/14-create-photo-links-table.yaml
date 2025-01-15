@@ -21,7 +21,7 @@ databaseChangeLog:
                     nullable: false
               - column:
                   name: photo_link
-                  type: varchar(255)
+                  type: varchar(512)
                   constraints:
                     nullable: false
         - addForeignKeyConstraint:
