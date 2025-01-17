@@ -102,9 +102,7 @@ public class UserServiceImpl implements UserService {
                 .skip((long) pageable.getPageNumber() * pageable.getPageSize())
                 .limit(pageable.getPageSize())
                 .peek(userContact -> userContact.getHouse().getPhotoLinks()
-                        .forEach(photoLink ->
-                                photoLink.setPhotoLink(
-                                        houseService.setUrl(photoLink.getPhotoLink())))
+                        .forEach(photoLink -> houseService.setUrl(photoLink.getPhotoLink()))
                 )
                 .map(contactMapper::toContactedHouseCardDto)
                 .toList();
