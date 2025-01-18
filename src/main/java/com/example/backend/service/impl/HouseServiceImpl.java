@@ -35,6 +35,7 @@ import software.amazon.awssdk.services.s3.model.GetUrlRequest;
 @RequiredArgsConstructor
 @Service
 public class HouseServiceImpl implements HouseService {
+    private static final int DEFAULT_PAGE_SIZE = 15;
     private static final int DEFAULT_SEARCH_PAGE = 0;
     private static final int HOUSE_CARTS_PAGE_SIZE = 15;
     private static final int HOUSE_CARTS_LIMIT = 3;
@@ -78,6 +79,9 @@ public class HouseServiceImpl implements HouseService {
     @Override
     public HousePageDto findAll(User user, HouseFilterDto filterDto,
                                 Sort sort, Pageable pageable) {
+        if (pageable.getPageNumber() > 0) {
+            pageable = PageRequest.of(pageable.getPageNumber() - 1, DEFAULT_PAGE_SIZE);
+        }
         Specification<House> spec = Specification.where(null);
 
         if (filterDto.getHouseType() != null) {

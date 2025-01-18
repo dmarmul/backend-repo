@@ -8,7 +8,6 @@ import com.example.backend.service.HouseService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -24,8 +23,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("residential/buy")
 public class HouseController {
-    private static final int DEFAULT_PAGE_SIZE = 15;
-
     private final HouseService houseService;
 
     @GetMapping
@@ -34,9 +31,6 @@ public class HouseController {
     public HousePageDto getAll(@AuthenticationPrincipal User user,
                                @ModelAttribute HouseFilterDto filterDto,
                                Sort sort, Pageable pageable) {
-        if (pageable.getPageNumber() > 0) {
-            pageable = PageRequest.of(pageable.getPageNumber() - 1, DEFAULT_PAGE_SIZE);
-        }
         return houseService.findAll(user, filterDto, sort, pageable);
     }
 

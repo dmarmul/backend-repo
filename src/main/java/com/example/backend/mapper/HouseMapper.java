@@ -29,7 +29,7 @@ public interface HouseMapper {
                     house.getPhotoLinks().stream()
                             .map(PhotoLink::getPhotoLink)
                             .findFirst()
-                            .orElse("https://smart-estate-backend.s3.amazonaws.com/standatrKv.jpg")
+                            .orElse("https://smart-estate-backend.s3.amazonaws.com/standatrKv.jpeg")
             );
         }
     }
