@@ -87,11 +87,11 @@ public class HouseServiceImpl implements HouseService {
         if (filterDto.getHouseType() != null) {
             spec = spec.and(HouseSpecification.houseTypeEquals(filterDto.getHouseType()));
         }
-        if (filterDto.getMinPrice() != null) {
-            spec = spec.and(HouseSpecification.priceLessThan(filterDto.getMinPrice()));
-        }
         if (filterDto.getMaxPrice() != null) {
             spec = spec.and(HouseSpecification.priceLessThan(filterDto.getMaxPrice()));
+        }
+        if (filterDto.getMinPrice() != null) {
+            spec = spec.and(HouseSpecification.priceGreaterThan(filterDto.getMinPrice()));
         }
         if (filterDto.getRooms() != null) {
             spec = spec.and(HouseSpecification.roomsEquals(filterDto.getRooms()));

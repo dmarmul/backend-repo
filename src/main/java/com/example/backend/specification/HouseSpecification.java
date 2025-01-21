@@ -24,6 +24,11 @@ public class HouseSpecification {
                 -> criteriaBuilder.lessThanOrEqualTo(root.get("price"), price);
     }
 
+    public static Specification<House> priceGreaterThan(BigDecimal price) {
+        return (root, query, criteriaBuilder)
+                -> criteriaBuilder.greaterThan(root.get("price"), price);
+    }
+
     public static Specification<House> roomsEquals(Integer rooms) {
         return (root, query, criteriaBuilder)
                 -> criteriaBuilder.equal(root.get("rooms"), rooms);
