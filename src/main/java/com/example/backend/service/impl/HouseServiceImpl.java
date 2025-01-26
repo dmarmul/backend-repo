@@ -49,8 +49,101 @@ public class HouseServiceImpl implements HouseService {
     private final RealtorMapper realtorMapper;
 
     @Override
-    public HouseDto findById(User user, Long id) {
+    public HouseDto findBuyHouseById(User user, Long id) {
         House house = checkHouse(id);
+        if (house.isRentHouse()) {
+            throw new EntityNotFoundException("Can't find house to buy by id: " + id);
+        }
+
+        return findHouseById(user, id, house);
+    }
+
+    @Override
+    public HouseDto findRentHouseById(User user, Long id) {
+        House house = checkHouse(id);
+        if (!house.isRentHouse()) {
+            throw new EntityNotFoundException("Can't find house for rent by id: " + id);
+        }
+        return findHouseById(user, id, house);
+    }
+
+    @Override
+    public HousePageDto findAllBuyHouses(User user, HouseFilterDto filterDto,
+                                         Sort sort, Pageable pageable) {
+        if (pageable.getPageNumber() > 0) {
+            pageable = PageRequest.of(pageable.getPageNumber() - 1, DEFAULT_PAGE_SIZE);
+        }
+        Specification<House> spec = Specification.where(null);
+        spec = spec.and(HouseSpecification.isNotRentHouse());
+
+        return findAllHouses(user, filterDto, sort, pageable, spec);
+    }
+
+    @Override
+    public HousePageDto findAllRentHouses(User user, HouseFilterDto filterDto,
+                                          Sort sort, Pageable pageable) {
+        if (pageable.getPageNumber() > 0) {
+            pageable = PageRequest.of(pageable.getPageNumber() - 1, DEFAULT_PAGE_SIZE);
+        }
+        Specification<House> spec = Specification.where(null);
+        spec = spec.and(HouseSpecification.isRentHouse());
+
+        return findAllHouses(user, filterDto, sort, pageable, spec);
+    }
+
+    @Override
+    @Transactional
+    public void likeBuyHouseById(User user, Long houseId) {
+        User savedUser = checkUser(user);
+        House house = checkHouse(houseId);
+        if (house.isRentHouse()) {
+            throw new EntityNotFoundException("Can't find house to buy by id: " + houseId);
+        }
+
+        likeHouseById(savedUser, house);
+    }
+
+    @Override
+    public void likeRentHouseById(User user, Long houseId) {
+        User savedUser = checkUser(user);
+        House house = checkHouse(houseId);
+        if (!house.isRentHouse()) {
+            throw new EntityNotFoundException("Can't find house for rent by id: " + houseId);
+        }
+
+        likeHouseById(savedUser, house);
+    }
+
+    public void addContact(User user, Long houseId) {
+        checkUser(user);
+        House house = checkHouse(houseId);
+        if (contactRepository.existsByUserAndHouse(user, house)) {
+            return;
+        }
+
+        UserContact contact = new UserContact();
+        contact.setUser(user);
+        contact.setHouse(house);
+        contact.setContactDate(LocalDateTime.now());
+
+        contactRepository.save(contact);
+    }
+
+    String setUrl(String photoName) {
+        S3Client s3 = S3Client.builder()
+                .region(software.amazon.awssdk.regions.Region.of(REGION))
+                .credentialsProvider(ProfileCredentialsProvider.create())
+                .build();
+
+        URL url = s3.utilities().getUrl(GetUrlRequest.builder()
+                .bucket(BUCKET_NAME)
+                .key(KEY_NAME + photoName)
+                .build());
+
+        return url.toString();
+    }
+
+    private HouseDto findHouseById(User user, Long id, House house) {
         house.getPhotoLinks()
                 .forEach(photoLink ->
                         photoLink.setPhotoLink(setUrl(photoLink.getPhotoLink())));
@@ -73,17 +166,12 @@ public class HouseServiceImpl implements HouseService {
                                 )
                 ).map(houseMapper::toHouseCartDto)
                 .toList());
+
         return houseDto;
     }
 
-    @Override
-    public HousePageDto findAll(User user, HouseFilterDto filterDto,
-                                Sort sort, Pageable pageable) {
-        if (pageable.getPageNumber() > 0) {
-            pageable = PageRequest.of(pageable.getPageNumber() - 1, DEFAULT_PAGE_SIZE);
-        }
-        Specification<House> spec = Specification.where(null);
-
+    private HousePageDto findAllHouses(User user, HouseFilterDto filterDto,
+                                       Sort sort, Pageable pageable, Specification<House> spec) {
         if (filterDto.getHouseType() != null) {
             spec = spec.and(HouseSpecification.houseTypeEquals(filterDto.getHouseType()));
         }
@@ -130,47 +218,13 @@ public class HouseServiceImpl implements HouseService {
         return housePageDto;
     }
 
-    @Override
-    @Transactional
-    public void likeHouseById(User user, Long houseId) {
-        User savedUser = checkUser(user);
-        House house = checkHouse(houseId);
-
+    private void likeHouseById(User savedUser, House house) {
         Set<House> likedHouses = savedUser.getLikedHouses();
         if (!likedHouses.contains(house)) {
             likedHouses.add(house);
         } else {
             likedHouses.remove(house);
         }
-    }
-
-    public void addContact(User user, Long houseId) {
-        checkUser(user);
-        House house = checkHouse(houseId);
-        if (contactRepository.existsByUserAndHouse(user, house)) {
-            return;
-        }
-
-        UserContact contact = new UserContact();
-        contact.setUser(user);
-        contact.setHouse(house);
-        contact.setContactDate(LocalDateTime.now());
-
-        contactRepository.save(contact);
-    }
-
-    String setUrl(String photoName) {
-        S3Client s3 = S3Client.builder()
-                .region(software.amazon.awssdk.regions.Region.of(REGION))
-                .credentialsProvider(ProfileCredentialsProvider.create())
-                .build();
-
-        URL url = s3.utilities().getUrl(GetUrlRequest.builder()
-                .bucket(BUCKET_NAME)
-                .key(KEY_NAME + photoName)
-                .build());
-
-        return url.toString();
     }
 
     private House checkHouse(Long id) {

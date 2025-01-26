@@ -60,6 +60,8 @@ public class House {
     private String description;
     @Column(nullable = false)
     private boolean isDeleted = false;
+    @Column(nullable = false)
+    private boolean isRentHouse = false;
     @OneToMany(mappedBy = "house", fetch = FetchType.LAZY,
             cascade = CascadeType.ALL, orphanRemoval = true)
     @ToString.Exclude

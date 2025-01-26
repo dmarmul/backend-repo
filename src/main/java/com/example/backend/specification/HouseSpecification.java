@@ -60,6 +60,16 @@ public class HouseSpecification {
         };
     }
 
+    public static Specification<House> isNotRentHouse() {
+        return (root, query, criteriaBuilder) ->
+                criteriaBuilder.equal(root.get("isRentHouse"), false);
+    }
+
+    public static Specification<House> isRentHouse() {
+        return (root, query, criteriaBuilder) ->
+                criteriaBuilder.equal(root.get("isRentHouse"), true);
+    }
+
     public static Specification<House> neighborhoodsIn(Set<String> neighborhoods) {
         Set<Neighborhood.NeighborhoodName> neighborhoodNameEnums = neighborhoods.stream()
                 .map(Neighborhood.NeighborhoodName::fromValue)

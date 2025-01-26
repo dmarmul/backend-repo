@@ -1,10 +1,10 @@
 databaseChangeLog:
   - changeSet:
-      id: insert-features-to-features-table
+      id: insert-houses-to-houses-table
       author: dmarmul
       changes:
         - sqlFile:
-            path: db/changelog/changes/20-insert-features-to-houses-features-table.sql
+            path: db/changelog/changes/19-insert-rent-houses-to-houses-table.sql
             endDelimiter: ";"
             splitStatements: true
             stripComments: true

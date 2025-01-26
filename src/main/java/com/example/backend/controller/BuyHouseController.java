@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("residential/buy")
-public class HouseController {
+public class BuyHouseController {
     private final HouseService houseService;
 
     @GetMapping
@@ -31,19 +31,19 @@ public class HouseController {
     public HousePageDto getAll(@AuthenticationPrincipal User user,
                                @ModelAttribute HouseFilterDto filterDto,
                                Sort sort, Pageable pageable) {
-        return houseService.findAll(user, filterDto, sort, pageable);
+        return houseService.findAllBuyHouses(user, filterDto, sort, pageable);
     }
 
     @GetMapping("/{id}")
     @Operation(summary = "Get house", description = "Get one house by id")
     public HouseDto getHouseById(@AuthenticationPrincipal User user, @PathVariable Long id) {
-        return houseService.findById(user, id);
+        return houseService.findBuyHouseById(user, id);
     }
 
     @PostMapping("/saved/{id}")
     @Operation(summary = "Add liked house", description = "Add liked house by id")
     public void likeHouseById(@AuthenticationPrincipal User user, @PathVariable Long id) {
-        houseService.likeHouseById(user, id);
+        houseService.likeBuyHouseById(user, id);
     }
 
     @PostMapping("/contact/{id}")

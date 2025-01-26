@@ -34,18 +34,20 @@ databaseChangeLog:
   - include:
       file: db/changelog/changes/17-insert-features-to-features-table.yaml
   - include:
-      file: db/changelog/changes/18-insert-houses-to-houses-table.yaml
+      file: db/changelog/changes/18-insert-buy-houses-to-houses-table.yaml
   - include:
-      file: db/changelog/changes/19-insert-links-to-photo-links-table.yaml
+      file: db/changelog/changes/19-insert-rent-houses-to-houses-table.yaml
   - include:
-      file: db/changelog/changes/20-insert-features-to-houses-features-table.yaml
+      file: db/changelog/changes/20-insert-links-to-photo-links-table.yaml
   - include:
-      file: db/changelog/changes/21-create-mail-users-table.yaml
+      file: db/changelog/changes/21-insert-features-to-houses-features-table.yaml
   - include:
-      file: db/changelog/changes/22-create-users-houses-table.yaml
+      file: db/changelog/changes/22-create-mail-users-table.yaml
   - include:
-      file: db/changelog/changes/23-create-users-realtors-table.yaml
+      file: db/changelog/changes/23-create-users-houses-table.yaml
   - include:
-      file: db/changelog/changes/24-create-check-mail-users-table.yaml
+      file: db/changelog/changes/24-create-users-realtors-table.yaml
   - include:
-      file: db/changelog/changes/25-create-users-contacts-table.yaml
+      file: db/changelog/changes/25-create-check-mail-users-table.yaml
+  - include:
+      file: db/changelog/changes/26-create-users-contacts-table.yaml
